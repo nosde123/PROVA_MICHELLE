@@ -1,0 +1,111 @@
+import javax.swing.JOptionPane;
+
+class Item {
+    private String titulo;
+    private String descricao;
+    private String localAchado;
+
+    public Item(String titulo, String descricao, String localAchado) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.localAchado = localAchado;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getLocalAchado() {
+        return localAchado;
+    }
+
+    public void setLocalAchado(String localAchado) {
+        this.localAchado = localAchado;
+    }
+}
+
+class AchadoPerdido extends Item {
+    private String foto;
+    private String tipo;
+    private String status;
+
+    public AchadoPerdido(String titulo, String descricao, String localAchado,
+                         String foto, String tipo, String status) {
+        super(titulo, descricao, localAchado);
+        this.foto = foto;
+        this.tipo = tipo;
+        this.status = status;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String buscarTitulo(String tituloBuscado) {
+        if (getTitulo().equalsIgnoreCase(tituloBuscado)) {
+            return "Título: " + getTitulo() + ", Descrição: " + getDescricao() +
+                    ", Local Achado: " + getLocalAchado();
+        } else {
+            return "Não encontrado";
+        }
+    }
+
+    public void visualizaDetalhes() {
+        String detalhes = "Título: " + getTitulo() + "\n" +
+                "Foto: " + getFoto() + "\n" +
+                "Local Achado: " + getLocalAchado() + "\n" +
+                "Tipo: " + getTipo() + "\n" +
+                "Status: " + getStatus();
+        JOptionPane.showMessageDialog(null, detalhes);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Crie um objeto do tipo AchadoPerdido com dados fictícios
+        AchadoPerdido item = new AchadoPerdido("Celular", "Samsung Galaxy S20", "Sala de estar",
+                "imagem_celular.jpg", "Eletrônico", "Encontrado");
+
+        // Faça a entrada de um texto pelo teclado
+        String tituloBuscado = JOptionPane.showInputDialog("Digite o título a ser buscado:");
+
+        // Use o método buscarTitulo para mostrar se encontrou ou não o item
+        String resultadoBusca = item.buscarTitulo(tituloBuscado);
+        JOptionPane.showMessageDialog(null, "Resultado da busca:\n" + resultadoBusca);
+
+        // Use o método visualizaDetalhes
+        item.visualizaDetalhes();
+    }
+}
