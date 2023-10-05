@@ -1,0 +1,165 @@
+class Pagamento {
+    private String dataHoraPagamento;
+    private int numeroPagamento;
+    private double valorPago;
+
+    public Pagamento(String dataHoraPagamento, int numeroPagamento, double valorPago) {
+        this.dataHoraPagamento = dataHoraPagamento;
+        this.numeroPagamento = numeroPagamento;
+        this.valorPago = valorPago;
+    }
+
+    public String getDataHoraPagamento() {
+        return dataHoraPagamento;
+    }
+
+    public void setDataHoraPagamento(String dataHoraPagamento) {
+        this.dataHoraPagamento = dataHoraPagamento;
+    }
+
+    public int getNumeroPagamento() {
+        return numeroPagamento;
+    }
+
+    public void setNumeroPagamento(int numeroPagamento) {
+        this.numeroPagamento = numeroPagamento;
+    }
+
+    public double getValorPago() {
+        return valorPago;
+    }
+
+    public void setValorPago(double valorPago) {
+        this.valorPago = valorPago;
+    }
+
+    public String imprimirCupomFiscal() {
+        return "Data/Hora: " + dataHoraPagamento +
+                ", Número de Pagamento: " + numeroPagamento +
+                ", Valor Pago: " + valorPago;
+    }
+}
+
+class CartaoCredito extends Pagamento {
+    private String numCartao;
+    private String titularCartao;
+
+    public CartaoCredito(String dataHoraPagamento, int numeroPagamento, double valorPago,
+                         String numCartao, String titularCartao) {
+        super(dataHoraPagamento, numeroPagamento, valorPago);
+        this.numCartao = numCartao;
+        this.titularCartao = titularCartao;
+    }
+
+    public String getNumCartao() {
+        return numCartao;
+    }
+
+    public void setNumCartao(String numCartao) {
+        this.numCartao = numCartao;
+    }
+
+    public String getTitularCartao() {
+        return titularCartao;
+    }
+
+    public void setTitularCartao(String titularCartao) {
+        this.titularCartao = titularCartao;
+    }
+
+    @Override
+    public String imprimirCupomFiscal() {
+        return super.imprimirCupomFiscal() +
+                ", Número do Cartão: " + numCartao +
+                ", Titular do Cartão: " + titularCartao;
+    }
+}
+
+class Pix extends Pagamento {
+    private String chavePix;
+
+    public Pix(String dataHoraPagamento, int numeroPagamento, double valorPago, String chavePix) {
+        super(dataHoraPagamento, numeroPagamento, valorPago);
+        this.chavePix = chavePix;
+    }
+
+    public String getChavePix() {
+        return chavePix;
+    }
+
+    public void setChavePix(String chavePix) {
+        this.chavePix = chavePix;
+    }
+
+    @Override
+    public String imprimirCupomFiscal() {
+        return super.imprimirCupomFiscal() + ", Chave Pix: " + chavePix;
+    }
+}
+
+class CartaoDebito extends Pagamento {
+    private String numCartao;
+
+    public CartaoDebito(String dataHoraPagamento, int numeroPagamento, double valorPago, String numCartao) {
+        super(dataHoraPagamento, numeroPagamento, valorPago);
+        this.numCartao = numCartao;
+    }
+
+    public String getNumCartao() {
+        return numCartao;
+    }
+
+    public void setNumCartao(String numCartao) {
+        this.numCartao = numCartao;
+    }
+
+    @Override
+    public String imprimirCupomFiscal() {
+        return super.imprimirCupomFiscal() + ", Número do Cartão: " + numCartao;
+    }
+}
+
+class Aluno {
+    private String nome;
+    private String matricula;
+
+    public Aluno(String nome, String matricula) {
+        this.nome = nome;
+        this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Alterando o nome do titular do cartão para "Edson de Salles"
+        String titularCartaoEdson = "Edson de Salles";
+
+        CartaoCredito cartaoCredito = new CartaoCredito("2023-10-05 14:30", 123456, 100.0, "123456789", titularCartaoEdson);
+        System.out.println("Cupom Fiscal para Cartão de Crédito:");
+        System.out.println(cartaoCredito.imprimirCupomFiscal());
+
+        Pix pix = new Pix("2023--05 15:00", 78109012, 50.0, "pix@exemplo.com");
+        System.out.println("\nCupom Fiscal para Pix:");
+        System.out.println(pix.imprimirCupomFiscal());
+
+        CartaoDebito cartaoDebito = new CartaoDebito("2023-10-05 15:30", 654321, 70.0, "987654321");
+        System.out.println("\nCupom Fiscal para Cartão de Débito:");
+        System.out.println(cartaoDebito.imprimirCupomFiscal());
+    }
+}
