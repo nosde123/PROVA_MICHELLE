@@ -1,0 +1,114 @@
+class Pessoa {
+    private String nome;
+    private String email;
+
+    public Pessoa(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+class Professor extends Pessoa {
+    private double salarioHora;
+    private int horasAula;
+
+    public Professor(String nome, String email, double salarioHora, int horasAula) {
+        super(nome, email);
+        this.salarioHora = salarioHora;
+        this.horasAula = horasAula;
+    }
+
+    public double getSalarioHora() {
+        return salarioHora;
+    }
+
+    public void setSalarioHora(double salarioHora) {
+        this.salarioHora = salarioHora;
+    }
+
+    public int getHorasAula() {
+        return horasAula;
+    }
+
+    public void setHorasAula(int horasAula) {
+        this.horasAula = horasAula;
+    }
+
+    public double calculaSalario() {
+        return salarioHora * horasAula;
+    }
+
+    public String mostraProfessor() {
+        return "Nome: " + getNome() +
+                ", Email: " + getEmail() +
+                ", Salário: R$" + calculaSalario();
+    }
+}
+
+class Aluno extends Pessoa {
+    private String periodo;
+    private String turma;
+
+    public Aluno(String nome, String email, String periodo, String turma) {
+        super(nome, email);
+        this.periodo = periodo;
+        this.turma = turma;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
+
+    public String mostraAluno() {
+        return "Nome: " + getNome() +
+                ", Email: " + getEmail() +
+                ", Período: " + periodo +
+                ", Turma: " + turma;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Criando um objeto Professor com dados "mocados"
+        Professor professor = new Professor("Professor Michelle", "professor@exemplo.com", 40.0, 20);
+
+        // Executando o método mostraProfessor para exibir informações do professor
+        System.out.println("Informações do Professor:");
+        System.out.println(professor.mostraProfessor());
+
+        // Criando um objeto Aluno com dados "mocados"
+        Aluno aluno = new Aluno("Aluno Edson de salles", "junior@exemplo.com", "3º período", "Turma A");
+
+        // Executando o método mostraAluno para exibir informações do aluno
+        System.out.println("\nInformações do Aluno:");
+        System.out.println(aluno.mostraAluno());
+    }
+}
